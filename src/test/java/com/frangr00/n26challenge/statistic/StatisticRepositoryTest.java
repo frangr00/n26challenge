@@ -25,7 +25,7 @@ import com.frangr00.n26challenge.transaction.Transaction;
 import com.frangr00.n26challenge.transaction.TransactionFactory;
 
 @RunWith(MockitoJUnitRunner.class)
-public class StadisticRepositoryTest {
+public class StatisticRepositoryTest {
 
 	@InjectMocks
 	private StatisticRepository statisticRepository;
@@ -35,7 +35,7 @@ public class StadisticRepositoryTest {
 	@InjectMocks
 	private TransactionFactory transactionFactory;
 
-	public StadisticRepositoryTest() {
+	public StatisticRepositoryTest() {
 		statisticRepository = new StatisticRepositoryInMemory(null);
 	}
 

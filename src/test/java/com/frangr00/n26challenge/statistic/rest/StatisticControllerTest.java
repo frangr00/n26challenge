@@ -31,7 +31,7 @@ public class StatisticControllerTest {
 	@MockBean
 	private StatisticRepository repo;
 	@Test
-	public void givenStadisticInRepo_whenGetStats_thenResourceIsReturned() throws Exception {
+	public void givenStatisticInRepo_whenGetStats_thenResourceIsReturned() throws Exception {
 		BDDMockito.given(repo.getStatistics()).willReturn(statisticTest());
 		
 		

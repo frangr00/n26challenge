@@ -17,7 +17,7 @@ class StatisticControler {
 	private StatisticRepository statisticRepository;
 
 	@GetMapping
-	public ResponseEntity<StatisticRepresentation> getStadistics() {
+	public ResponseEntity<StatisticRepresentation> getStatistics() {
 		StatisticRepresentation statistic = new StatisticRepresentation(statisticRepository.getStatistics());
 		
 		return new ResponseEntity<StatisticRepresentation>(statistic, HttpStatus.OK);

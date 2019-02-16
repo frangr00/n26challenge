@@ -26,7 +26,7 @@ class StatisticRepositoryInMemory implements StatisticRepository {
 	public void save(Transaction transaction) {
 		PartialDuration partialDuration = new PartialDuration(transaction.getInstant());
 		partialStatistics.computeIfAbsent(partialDuration.getSecond(), key -> new PartialStatistic(partialDuration));
-		partialStatistics.compute(partialDuration.getSecond(), (key, partialStadistic) -> partialStadistic.accept(partialDuration, transaction.getAmount()));
+		partialStatistics.compute(partialDuration.getSecond(), (key, partialStatistic) -> partialStatistic.accept(partialDuration, transaction.getAmount()));
 	}
 
 	/**
