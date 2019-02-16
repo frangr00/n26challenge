@@ -17,11 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.frangr00.n26challenge.StadisticsApplication;
+import com.frangr00.n26challenge.StatisticsApplication;
 import com.frangr00.n26challenge.transaction.rest.TransactionRepresentation;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = { StadisticsApplication.class })
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = { StatisticsApplication.class })
 @AutoConfigureMockMvc
 public class TransactionControllerTest {
 

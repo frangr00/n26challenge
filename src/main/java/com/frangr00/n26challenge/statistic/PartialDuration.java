@@ -1,4 +1,4 @@
-package com.frangr00.n26challenge.stadistic;
+package com.frangr00.n26challenge.statistic;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

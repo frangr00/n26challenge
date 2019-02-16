@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.frangr00</groupId>
-	<artifactId>stadistics</artifactId>
+	<artifactId>statistics</artifactId>
 	<version>0.1.0</version>
 	<packaging>jar</packaging>
-	<name>stadistics</name>
-	<description>Demo project for Spring Boot</description>
+	<name>statistics</name>
+	<description>Demo project N26 challenge</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -45,6 +45,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

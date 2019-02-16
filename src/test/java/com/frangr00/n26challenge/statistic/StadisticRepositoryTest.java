@@ -1,4 +1,4 @@
-package com.frangr00.n26challenge.stadistic;
+package com.frangr00.n26challenge.statistic;
 
 import static com.frangr00.n26challenge.transaction.TransactionTestFixture.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +18,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.frangr00.n26challenge.TimeService;
+import com.frangr00.n26challenge.statistic.Statistic;
+import com.frangr00.n26challenge.statistic.StatisticRepository;
+import com.frangr00.n26challenge.statistic.StatisticRepositoryInMemory;
 import com.frangr00.n26challenge.transaction.Transaction;
 import com.frangr00.n26challenge.transaction.TransactionFactory;
 
@@ -25,7 +28,7 @@ import com.frangr00.n26challenge.transaction.TransactionFactory;
 public class StadisticRepositoryTest {
 
 	@InjectMocks
-	private StadisticRepository stadisticRepository;
+	private StatisticRepository statisticRepository;
 	@Mock
 	private TimeService timeService;
 	private Instant nowInstant = Instant.now(Clock.systemDefaultZone());
@@ -33,7 +36,7 @@ public class StadisticRepositoryTest {
 	private TransactionFactory transactionFactory;
 
 	public StadisticRepositoryTest() {
-		stadisticRepository = new StadisticRepositoryInMemory(null);
+		statisticRepository = new StatisticRepositoryInMemory(null);
 	}
 
 	@Before
@@ -49,9 +52,9 @@ public class StadisticRepositoryTest {
 		Transaction transaction = transactionFactory.create(10d, nowInstant.toEpochMilli())
 				.get();
 
-		stadisticRepository.save(transaction);
+		statisticRepository.save(transaction);
 
-		then(stadisticRepository.getStadistics()).satisfies(stats -> {
+		then(statisticRepository.getStatistics()).satisfies(stats -> {
 			assertThat(stats.getAverage()).isEqualTo(10d);
 			assertThat(stats.getCount()).isEqualTo(1);
 			assertThat(stats.getMin()).isEqualTo(10d);
@@ -65,12 +68,12 @@ public class StadisticRepositoryTest {
 				.transactionNow(10d)
 				.transactionNow(15d)
 				.transactionNow(20d)
-				.inRepo(stadisticRepository);
+				.inRepo(statisticRepository);
 
-		Stadistic stadistic = stadisticRepository.getStadistics();
+		Statistic statistic = statisticRepository.getStatistics();
 
-		then(stadistic.getSum()).isEqualTo(45d);
-		then(stadistic.getCount()).isEqualTo(3);
+		then(statistic.getSum()).isEqualTo(45d);
+		then(statistic.getCount()).isEqualTo(3);
 	}
 
 	@Test
@@ -80,12 +83,12 @@ public class StadisticRepositoryTest {
 				.transactionNow(1d)
 				.transaction30segBefore(15d)
 				.transaction59segBefore(20d)
-				.inRepo(stadisticRepository);
+				.inRepo(statisticRepository);
 
-		Stadistic stadistic = stadisticRepository.getStadistics();
+		Statistic statistic = statisticRepository.getStatistics();
 
-		then(stadistic.getSum()).isEqualTo(46d);
-		then(stadistic.getCount()).isEqualTo(4);
+		then(statistic.getSum()).isEqualTo(46d);
+		then(statistic.getCount()).isEqualTo(4);
 	}
 
 	@Test
@@ -93,13 +96,13 @@ public class StadisticRepositoryTest {
 		given(nowInstant)
 				.transactionNow(10d)
 				.transaction60SegAfter(20d)
-				.inRepo(stadisticRepository);
+				.inRepo(statisticRepository);
 		givenCurrentInstantPlusSeconds(60);
 
-		Stadistic stadistic = stadisticRepository.getStadistics();
+		Statistic statistic = statisticRepository.getStatistics();
 
-		then(stadistic.getSum()).isEqualTo(20d);
-		then(stadistic.getCount()).isEqualTo(1);
+		then(statistic.getSum()).isEqualTo(20d);
+		then(statistic.getCount()).isEqualTo(1);
 	}
 
 	@Test
@@ -107,27 +110,27 @@ public class StadisticRepositoryTest {
 		given(nowInstant)
 				.transactionNow(10d)
 				.transaction30segBefore(10d)
-				.inRepo(stadisticRepository);
+				.inRepo(statisticRepository);
 		givenCurrentInstantPlusSeconds(30);
 
-		Stadistic stadistic = stadisticRepository.getStadistics();
+		Statistic statistic = statisticRepository.getStatistics();
 
-		then(stadistic.getSum()).isEqualTo(10d);
+		then(statistic.getSum()).isEqualTo(10d);
 	}
 
 	@Test
 	public void givenRepositoryWithRandomValues_whenGetStat_thenRightStadisticsAreReturned() {
 		DoubleSummaryStatistics stats = given(nowInstant)
 				.randomTransactions(1_000_000)
-				.inRepo(stadisticRepository);
+				.inRepo(statisticRepository);
 
-		Stadistic stadistic = stadisticRepository.getStadistics();
+		Statistic statistic = statisticRepository.getStatistics();
 
-		then(stadistic.getCount()).isEqualTo(1_000_000);
-		then(stadistic.getSum()).isEqualTo(stats.getSum());
-		then(stadistic.getAverage()).isEqualTo(stats.getAverage());
-		then(stadistic.getMax()).isEqualTo(stats.getMax());
-		then(stadistic.getMin()).isEqualTo(stats.getMin());
+		then(statistic.getCount()).isEqualTo(1_000_000);
+		then(statistic.getSum()).isEqualTo(stats.getSum());
+		then(statistic.getAverage()).isEqualTo(stats.getAverage());
+		then(statistic.getMax()).isEqualTo(stats.getMax());
+		then(statistic.getMin()).isEqualTo(stats.getMin());
 	}
 
 	private void givenCurrentInstantPlusSeconds(int seconds) {

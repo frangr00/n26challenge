@@ -1,9 +1,9 @@
-package com.frangr00.n26challenge.stadistic.rest;
+package com.frangr00.n26challenge.statistic.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.frangr00.n26challenge.stadistic.Stadistic;
+import com.frangr00.n26challenge.statistic.Statistic;
 
-class StadisticRepresentation {
+class StatisticRepresentation {
 
 	private double sum;
 	@JsonProperty(value = "avg")
@@ -12,12 +12,12 @@ class StadisticRepresentation {
 	private double min;
 	private long count;
 
-	public StadisticRepresentation(Stadistic stadistics) {
-		sum = stadistics.getSum();
-		average = stadistics.getAverage();
-		max = stadistics.getMax();
-		min = stadistics.getMin();
-		count = stadistics.getCount();
+	public StatisticRepresentation(Statistic statistics) {
+		sum = statistics.getSum();
+		average = statistics.getAverage();
+		max = statistics.getMax();
+		min = statistics.getMin();
+		count = statistics.getCount();
 	}
 
 	public double getSum() {

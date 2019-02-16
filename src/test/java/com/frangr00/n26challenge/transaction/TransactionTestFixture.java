@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import com.frangr00.n26challenge.stadistic.StadisticRepository;
+import com.frangr00.n26challenge.statistic.StatisticRepository;
 
 public class TransactionTestFixture {
 
@@ -47,9 +47,9 @@ public class TransactionTestFixture {
 		return this;
 	}
 
-	public DoubleSummaryStatistics inRepo(StadisticRepository stadisticRepository) {
+	public DoubleSummaryStatistics inRepo(StatisticRepository statisticRepository) {
 		transactions.stream()
-				.forEach(t -> stadisticRepository.save(t));
+				.forEach(t -> statisticRepository.save(t));
 		return summaryStats;
 	}
 

@@ -1,4 +1,4 @@
-package com.frangr00.n26challenge.stadistic.rest;
+package com.frangr00.n26challenge.statistic.rest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -17,22 +17,22 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.frangr00.n26challenge.StadisticsApplication;
-import com.frangr00.n26challenge.stadistic.Stadistic;
-import com.frangr00.n26challenge.stadistic.StadisticRepository;
+import com.frangr00.n26challenge.StatisticsApplication;
+import com.frangr00.n26challenge.statistic.Statistic;
+import com.frangr00.n26challenge.statistic.StatisticRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = { StadisticsApplication.class })
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = { StatisticsApplication.class })
 @AutoConfigureMockMvc
-public class StadisticControllerTest {
+public class StatisticControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
 	@MockBean
-	private StadisticRepository repo;
+	private StatisticRepository repo;
 	@Test
 	public void givenStadisticInRepo_whenGetStats_thenResourceIsReturned() throws Exception {
-		BDDMockito.given(repo.getStadistics()).willReturn(stadisticTest());
+		BDDMockito.given(repo.getStatistics()).willReturn(statisticTest());
 		
 		
 		mvc.perform(get("/statistics").contentType(MediaType.APPLICATION_JSON))
@@ -46,8 +46,8 @@ public class StadisticControllerTest {
 				.andExpect(jsonPath("count", is(1)));
 		
 	}
-	private Stadistic stadisticTest() {
-		return new Stadistic(10d, 10d, 10d, 10d, 1);
+	private Statistic statisticTest() {
+		return new Statistic(10d, 10d, 10d, 10d, 1);
 	}
 
 }

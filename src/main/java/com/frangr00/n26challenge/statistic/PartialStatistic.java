@@ -1,18 +1,18 @@
-package com.frangr00.n26challenge.stadistic;
+package com.frangr00.n26challenge.statistic;
 
 import java.time.Instant;
 import java.util.DoubleSummaryStatistics;
 
-class PartialStadistic {
+class PartialStatistic {
 	private PartialDuration partialDuration;
 	private DoubleSummaryStatistics summaryStatistics;
 
-	public PartialStadistic(PartialDuration partialDuration) {
+	public PartialStatistic(PartialDuration partialDuration) {
 		summaryStatistics = new DoubleSummaryStatistics();
 		this.partialDuration = partialDuration;
 	}
 
-	public PartialStadistic accept(PartialDuration partialDuration, double amount) {
+	public PartialStatistic accept(PartialDuration partialDuration, double amount) {
 		if (!this.partialDuration.isSameInstantSlot(partialDuration)) {
 			this.partialDuration = partialDuration;
 			summaryStatistics = new DoubleSummaryStatistics();

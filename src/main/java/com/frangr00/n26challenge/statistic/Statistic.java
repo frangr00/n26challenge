@@ -1,8 +1,8 @@
-package com.frangr00.n26challenge.stadistic;
+package com.frangr00.n26challenge.statistic;
 
 import java.util.DoubleSummaryStatistics;
 
-public class Stadistic {
+public class Statistic {
 
 	private double sum;
 	private double average;
@@ -10,7 +10,7 @@ public class Stadistic {
 	private double min;
 	private long count;
 
-	public Stadistic(double sum, double average, double max, double min, long count) {
+	public Statistic(double sum, double average, double max, double min, long count) {
 		super();
 		this.sum = sum;
 		this.average = average;
@@ -19,8 +19,8 @@ public class Stadistic {
 		this.count = count;
 	}
 
-	public static Stadistic of(DoubleSummaryStatistics sumary) {
-		return new Stadistic(sumary.getSum(), sumary.getAverage(), sumary.getMax(), sumary.getMin(), sumary.getCount());
+	public static Statistic of(DoubleSummaryStatistics sumary) {
+		return new Statistic(sumary.getSum(), sumary.getAverage(), sumary.getMax(), sumary.getMin(), sumary.getCount());
 	}
 
 	public double getSum() {

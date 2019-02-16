@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.frangr00.n26challenge.stadistic.StadisticRepository;
+import com.frangr00.n26challenge.statistic.StatisticRepository;
 import com.frangr00.n26challenge.transaction.Transaction;
 import com.frangr00.n26challenge.transaction.TransactionFactory;
 
@@ -18,12 +18,12 @@ import io.vavr.control.Either;
 class TransactionController {
 
 	private TransactionFactory transactionFactory;
-	private StadisticRepository stadisticRepository;
+	private StatisticRepository statisticRepository;
 	
-	public TransactionController(TransactionFactory transactionFactory, StadisticRepository stadisticRepository) {
+	public TransactionController(TransactionFactory transactionFactory, StatisticRepository statisticRepository) {
 		super();
 		this.transactionFactory = transactionFactory;
-		this.stadisticRepository = stadisticRepository;
+		this.statisticRepository = statisticRepository;
 	}
 
 	@PostMapping
@@ -35,7 +35,7 @@ class TransactionController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT)
 					.build();
 		}
-		stadisticRepository.save(transactionResult.get());
+		statisticRepository.save(transactionResult.get());
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
